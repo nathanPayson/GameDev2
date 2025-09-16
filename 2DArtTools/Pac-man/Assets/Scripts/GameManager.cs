@@ -1,16 +1,18 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action NewGame;
-    public static Action GameOver;
-    public static Action GameWon;
-    public static Action newLife;
-    public static Action<int> scoreUpdated;
-    public static Action<int> livesUpdated;
-    public static Action<int> pointsLeftUpdated;
+    public static event Action NewGame;
+    public static event Action GameOver;
+    public static event Action GameWon;
+    public static event Action newLife;
+    public static event Action<int> scoreUpdated;
+    public static event Action<int> livesUpdated;
+    public static event Action<int> pointsLeftUpdated;
 
+    public static UnityEvent onGameStart;
 
     int score;
     int lives;
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
+
         GridManager.pointsActivated += setPointsLeft;
         point.pointScored += OnPointScored;
         ghost.playerHit += OnLifeLost;
